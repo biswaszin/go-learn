@@ -22,6 +22,13 @@ func TestHello(t *testing.T){
 			t.Errorf("got %q want %q", got, want)
 		}
 	})
+
+	t.Run("in Spanish", func(t *testing.T){
+		got:= Hello("Elodie", "Spanish")
+		want:= "Hola, Elodie"
+
+		assertCorrectMessage(t, got, want)
+	})
 }
 
 func assertCorrectMessage(t testing.TB, got, want string){
