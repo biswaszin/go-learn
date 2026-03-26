@@ -113,6 +113,8 @@ func main(){
 
 	fmt.Println(justArrays())
 	fmt.Println(justSlices())
+
+	// setting up the git so making a random commit
 }
 
 
