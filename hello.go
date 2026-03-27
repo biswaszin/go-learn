@@ -95,6 +95,18 @@ func justSlices() string{
 	return "Done"
 }
 
+func justMake(){
+	a := make([]int, 4, 5) //make is another way to initialize slices, like
+	printSlices("a", a) // var := make(data type, length, capacity)
+	b := make([]int, 5) // length only 5, and so is capacity 5 by default
+	c := b[:2]
+	printSlices("c", c)
+}
+
+func printSlices(s string, x []int) {
+	fmt.Printf("Var: %s, Len: %v, Cap: %v, Var: %v\n", s, len(x), cap(x), x)
+}
+
 func main(){
 	fmt.Println(Hello("World", "English"))
 	random := justLoops()
@@ -115,6 +127,8 @@ func main(){
 	fmt.Println(justSlices())
 
 	// setting up the git so making a random commit
+	
+	justMake()
 }
 
 
