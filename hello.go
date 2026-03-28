@@ -65,9 +65,46 @@ func justPointers() string {
 
 // to define a struct 
 
-type coordinates struct {
-	x int
-	y int
+type Coordinates struct {
+	Lat, Long float64
+}
+
+type Vertex struct{
+	Lat, Long float64
+}
+
+var m map[string]Vertex
+
+func justMaps(){
+	m = make(map[string]Vertex)
+	m["Adamas"] = Vertex{
+		40.11290387, -85.91023809,
+	}
+	fmt.Println(m["Adamas"])
+}
+
+func justMakeMaps(){
+	m := make(map[string]int)
+
+	m["Answer"] = 42
+	fmt.Println("The value is: ", m["Answer"])
+
+	m["Answer"] = 48
+	fmt.Println("The value is: ", m["Answer"])
+
+	delete(m, "Answer")
+	fmt.Println("The value is: ", m["Answer"])
+
+	v, ok := m["Answer"]
+	fmt.Println("The value is: ", v, "Present?", ok)
+
+	// let's add another key value pair 
+	
+	m["AU/2025/0003743"] = 333
+	// To see the key and the value using range, we do
+	for key, value := range m {
+		fmt.Println(key,value)
+	}
 }
 
 func justArrays() string{
@@ -103,8 +140,39 @@ func justMake(){
 	printSlices("c", c)
 }
 
+func justAppend(){
+	var slice_eg []int
+	slice_eg = append(slice_eg, 5)
+	printSlices("slice_eg", slice_eg)
+}
+
+func justAnonymousFunc() {
+	add := func (x, y int) int{
+		return x+y
+	}
+
+	fmt.Printf("Addition: %v\n", add(5,6))
+}
+
+
 func printSlices(s string, x []int) {
 	fmt.Printf("Var: %s, Len: %v, Cap: %v, Var: %v\n", s, len(x), cap(x), x)
+}
+
+// Understanding the Methods in Go
+// So far, it's kinda like member functions from classes in C++
+// You can essentially do the same here in Go. For example
+
+type Position struct{
+	X int
+	Y int
+}
+
+func (point Position) ChangeInPosition() Position{
+	return Position{
+		point.X + 10,
+		point.Y + 8,
+	}
 }
 
 func main(){
@@ -114,14 +182,14 @@ func main(){
 	fmt.Println(justDefer())
 	fmt.Println(justPointers())
 	
-	point := coordinates{}
-	point.x = 2
-	point.y = 4
+	point := Coordinates{}
+	point.Lat = 2.1231
+	point.Long = 4.4123
 	
-	fmt.Println(point.x, point.y)
+	fmt.Println(point.Lat, point.Long)
 	another_point := &point
-	another_point.x, another_point.y = 4,8
-	fmt.Println(point.x, point.y)
+	another_point.Lat, another_point.Long = 4,8
+	fmt.Println(point.Lat, point.Long)
 
 	fmt.Println(justArrays())
 	fmt.Println(justSlices())
@@ -129,6 +197,14 @@ func main(){
 	// setting up the git so making a random commit
 	
 	justMake()
+	justAppend()
+	justMaps()
+	justMakeMaps()
+	justAnonymousFunc()
+
+	// For the basic ass physics engine (it's far from engine. i jus wanna see how methods work)
+	pointA := Position{5,8}
+	fmt.Println(pointA.ChangeInPosition())
 }
 
 
